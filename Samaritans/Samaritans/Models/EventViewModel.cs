@@ -15,7 +15,34 @@ namespace Samaritans.Models
 			this.e = e;
 		}
 
-		public string Name { get { return e.Name; } }
-		public string Purpose {	get { return "string"; } }
+		public string Name
+		{
+			get { return e.Name; }
+		}
+
+		public string Purpose
+		{
+			get { return e.Purpose; }
+		}
+
+		public DateTime EventDate
+		{
+			get { return e.EventDate; }
+		}
+
+		public int MinAttendance
+		{
+			get { return e.MinAttendance; }
+		}
+
+		public int MaxAttendance
+		{
+			get { return e.MaxAttendance; }
+		}
+
+		public string OrganizerName
+		{
+			get { return e.Organizer.UserName; }
+		}
 	}
 }
