@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Samaritans.Data.Entities
 {
@@ -7,22 +8,29 @@ namespace Samaritans.Data.Entities
     {
         public Event()
         {
-            Resources = new HashSet<Resource>();
-            Users = new HashSet<AspNetUser>();
-        }
+			Participants = new HashSet<Attendee>();
+			Resources = new HashSet<Resource>();
+		}
 
-        public int Id { get; set; }
+		public int Id { get; set; }
 
-        public string OrganizerId { get; set; }
+		[Required]
+		public string OrganizerId { get; set; }
 
-        public string Name { get; set; }
+		[Required]
+		public string Name { get; set; }
+		public string Purpose { get; set; }
 
-        public DateTime EventDate { get; set; }
+		public int MinAttendance { get; set; }
+		public int MaxAttendance { get; set; }
 
+		[Required]
+		public DateTime EventDate { get; set; }
+
+		[Required]
         public AspNetUser Organizer { get; set; }
 
-        public virtual ICollection<Resource> Resources { get; set; }
-
-        public virtual ICollection<AspNetUser> Users { get; set; }
+		public virtual ICollection<Attendee> Participants { get; set; }
+		public virtual ICollection<Resource> Resources { get; set; }
     }
 }
