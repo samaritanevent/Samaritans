@@ -13,7 +13,7 @@ namespace Samaritans.Data.Entities
             AspNetUserLogins = new HashSet<AspNetUserLogin>();
             AspNetRoles = new HashSet<AspNetRole>();
 
-            Availabilities = new HashSet<Availability>();
+            Events = new HashSet<Event>();
             Preferences = new HashSet<Preference>();
             Ratings = new HashSet<Rating>();
         }
@@ -45,7 +45,7 @@ namespace Samaritans.Data.Entities
         [StringLength(256)]
         public string UserName { get; set; }
 
-        public virtual ICollection<Availability> Availabilities { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
 
         public virtual ICollection<Preference> Preferences { get; set; }
 

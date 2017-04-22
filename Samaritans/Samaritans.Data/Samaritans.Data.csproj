@@ -59,12 +59,12 @@
     <Compile Include="Entities\AspNetUser.cs" />
     <Compile Include="Entities\AspNetUserClaim.cs" />
     <Compile Include="Entities\AspNetUserLogin.cs" />
-    <Compile Include="Entities\Attendence.cs" />
-    <Compile Include="Entities\Availability.cs" />
+    <Compile Include="Entities\Resource.cs" />
     <Compile Include="Entities\DoGooderDb.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\Preference.cs" />
     <Compile Include="Entities\Rating.cs" />
+    <Compile Include="Entities\Attendee.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
