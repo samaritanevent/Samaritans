@@ -1,0 +1,24 @@
+﻿@model Samaritans.Models.EventViewModel
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<article class="event">
+	<form>
+		<h2>@M<input type="type" name="name" value="odel.Name</h2>
+		<div>@Model.EventTime</div>
+		<div>@Model.Attendance</div>
+		<p>@Model.Purpose</p>
+		<h3>Bring:</h3>
+		@for (var i = 0; i < Model.Resources.Length; i++)
+		{
+			var resources = Model.Resources[i];
+			<div>
+				<span>resource.Description</span>
+				<input type="hidden" name="resources[i].description" />
+				<input type="number" name="resources[i].quantity" />
+			</div>
+		}
+		" /> type="submit" value="Join" />
+	</form>
+</article>
