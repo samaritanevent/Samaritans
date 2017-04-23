@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Samaritans.Data.Entities;
 using Samaritans.Models.Event;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -17,8 +18,21 @@ namespace Samaritans.Controllers
 
         public ActionResult Index()
         {
+            var numberGen = new Random();
+
             var results = db.Events
-                .Select(x => new EventViewModel(x, x.Organizer)).ToList();
+                .AsEnumerable()
+                .Select(x => new EventListModel
+                {
+                    Name = x.Name,
+                    EventDate = x.EventDate,
+                    MaxAttendance = x.MaxAttendance,
+                    MinAttendance = x.MinAttendance,
+                    Purpose = x.Purpose,
+                    OrganizerName = User.Identity.GetUserName(),
+                    DistanceFromUser = decimal.Parse($"{numberGen.Next(1, 10)}.{numberGen.Next(1, 10)}")
+                }).ToList();
+
             return View(results);
         }
 
@@ -52,7 +66,9 @@ namespace Samaritans.Controllers
 
             db.Events.Add(eventEntity);
             db.SaveChanges();
-            return View();
+
+            return View("Index");
         }
+
     }
 }

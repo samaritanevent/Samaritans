@@ -79,3 +79,22 @@ textarea {
     height: 25px;
     padding: 2px;
 }
+
+
+#EventList 
+{
+    border: 1px solid black;
+    width: 100%;
+}
+
+#EventList thead
+{
+    background-color: #10253A;
+    color: #FFF;
+    font-weight: bold;
+}
+
+#EventList th, td 
+{
+    padding: .5em;
+}
