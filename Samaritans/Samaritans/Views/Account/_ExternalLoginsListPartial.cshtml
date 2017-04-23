@@ -1,28 +1,48 @@
 ﻿@model Samaritans.Models.ExternalLoginListViewModel
 @using Microsoft.Owin.Security
 
-<h4>Use another service to log in.</h4>
+<h2 style="text-align: center">Choose a service to log in with</h2>
+<p> </p>
 <hr />
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-    if (loginProviders.Count() == 0) {
-        <div>
-            <p>
-                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support logging in via external services.
-            </p>
+
+    IEnumerable<AuthenticationDescription> providers = loginProviders.ToList();
+
+    var google = providers.FirstOrDefault(o => o.AuthenticationType == "Google");
+    var facebook = providers.FirstOrDefault(o => o.AuthenticationType == "Facebook");
+
+    using (Html.BeginForm("ExternalLogin", "Account", new { Model.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row" id="socialLoginList">
+            @if (google != null)
+            {
+                <button type="submit" class="btn-sq-lg oauth oauth-google" id="@google.AuthenticationType" name="provider" value="@google.AuthenticationType">
+                    Google
+                </button>
+            }
+
+            @if (facebook != null)
+            {
+                <button type="submit" class="btn-sq-lg oauth oauth-facebook" id="@facebook.AuthenticationType" name="provider" value="@facebook.AuthenticationType">
+                    Facebook
+                </button>
+            }
+
+            @if (google != null)
+            {
+                <button type="submit" class="btn-sq-lg oauth oauth-linkedin" id="@google.AuthenticationType" name="provider" value="@google.AuthenticationType">
+                    Linkedin
+                </button>
+            }
+
+            @if (google != null)
+            {
+                <button type="submit" class="btn-sq-lg oauth oauth-twitter" id="@google.AuthenticationType" name="provider" value="@google.AuthenticationType">
+                    Twitter
+                </button>
+            }
         </div>
-    }
-    else {
-        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
-            @Html.AntiForgeryToken()
-            <div id="socialLoginList">
-                <p>
-                    @foreach (AuthenticationDescription p in loginProviders) {
-                        <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
-                    }
-                </p>
-            </div>
-        }
     }
 }
