@@ -164,7 +164,7 @@ namespace Samaritans.Models.Event
         [Display(Name = "Organizer Name")]
         public string OrganizerName
         {
-            get { return e.Organizer.UserName; }
+            get { return e.Organizer?.UserName ?? "N/A"; }
         }
     }
 }
