@@ -1,13 +1,7 @@
 ﻿@model List<EventListModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Your Events";
 }
-
-<h2>Your Events</h2>
-
-<div>
-    @Html.ActionLink("Create New Event", "Create", "Event")
-</div>
 
 <div class="panel">
     <div class="panel-heading">
@@ -20,9 +14,8 @@
             <div class="form-group" id="EventFlexBox">
             </div>
             <div class="form-group row">
-                <div class="col-md-12">
-                    @Html.Hidden("ShowMoreOffset", 0)
-                    <input type="button" value="Show More" onclick="ShowMore('@DateTime.Now.Date')" />
+                <div class="col-md-4 col-md-offset-8">
+                    <input class="btn btn-secondary" type="button" value="Show More" onclick="ShowMore()" />
                 </div>
             </div>
         </div>

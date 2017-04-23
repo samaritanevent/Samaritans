@@ -3,23 +3,17 @@
     ShowMore();
 });
 
-function ShowMore(dateTime)
+function ShowMore()
 {
     $.ajax({
         url: "/Event/ShowMore",
         dataType: "json",
         data: {
-            startDate: dateTime,
-            offset: $("#ShowMoreOffset").val()
+            currentOffset: $("#CurrentOffset").val()
         },
-        success: function (data)
+        complete: function (data)
         {
-            var lastOffset = $("#ShowMoreOffset").val();
-            $("#ShowMoreOffset").val(lastOffset + 1);
-
-            $("#EventFlexBox").html(data);
-            alert("Much success.");
-            //callback(data);
+            $("#EventFlexBox").html(data.responseText);
         }
     });
 }

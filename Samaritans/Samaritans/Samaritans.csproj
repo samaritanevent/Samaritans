@@ -376,6 +376,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Event\EventExploreModel.cs" />
     <Compile Include="Models\Event\EventListModel.cs" />
     <Compile Include="Models\Event\EventCreateModel.cs" />
     <Compile Include="Models\Event\EventViewModel.cs" />
@@ -470,6 +471,7 @@
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\EventListModel.cshtml" />
     <Content Include="Views\Event\Explore.cshtml" />
+    <Content Include="Views\Event\_EventList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\EventCard.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -20,13 +20,13 @@ namespace Samaritans.Controllers
         public ActionResult Index()
         {
             var numberGen = new Random();
-			var userId = User.Identity.GetUserId();
-			var currentUser = db.AspNetUsers.Find(userId);
+            var userId = User.Identity.GetUserId();
+            var currentUser = db.AspNetUsers.Find(userId);
 
             var results = db.Events
                 .AsEnumerable()
-				.Where(e => e.IsAttending(currentUser))
-				.Select(x => new EventListModel
+                .Where(e => e.IsAttending(currentUser))
+                .Select(x => new EventListModel
                 {
                     Name = x.Name,
                     EventDate = x.EventDate,
@@ -34,7 +34,7 @@ namespace Samaritans.Controllers
                     MinAttendance = x.MinAttendance,
                     Purpose = x.Purpose,
                     OrganizerName = User.Identity.GetUserName(),
-					IsOrganizing = x.Organizer == currentUser,
+                    IsOrganizing = x.Organizer == currentUser,
                     DistanceFromUser = decimal.Parse($"{numberGen.Next(1, 10)}.{numberGen.Next(1, 10)}")
                 }).ToList();
 
@@ -81,16 +81,20 @@ namespace Samaritans.Controllers
             return View();
         }
 
-        public PartialViewResult ShowMore(string offset)
+        public PartialViewResult ShowMore(string currentOffset)
         {
             var numberGen = new Random();
 
             DateTime convertedOffset;
-            if (!DateTime.TryParse(offset, out convertedOffset))
+
+            if (!DateTime.TryParse(currentOffset, out convertedOffset))
             {
                 convertedOffset = DateTime.Today;
             }
-            var results = db.Events.Where(x => x.EventDate >= convertedOffset)
+
+            convertedOffset = convertedOffset.AddDays(7);
+
+            var results = db.Events.Where(x => x.EventDate <= convertedOffset)
                 .AsEnumerable()
                 .Select(x => new EventListModel
                 {
@@ -100,10 +104,16 @@ namespace Samaritans.Controllers
                     MinAttendance = x.MinAttendance,
                     Purpose = x.Purpose,
                     OrganizerName = User.Identity.GetUserName(),
-                    DistanceFromUser = decimal.Parse($"{numberGen.Next(1, 10)}.{numberGen.Next(1, 10)}")
+                    DistanceFromUser = decimal.Parse($"{numberGen.Next(x.Id, x.Id + 10)}.{numberGen.Next(x.Id, x.Id + 10)}")
                 }).ToList();
 
-            return PartialView("EventCard", results ?? new List<EventListModel>());
+            var vm = new EventExploreModel
+            {
+                Events = results,
+                CurrentOffset = convertedOffset
+            };
+
+            return PartialView("_EventList", vm);
         }
 
         public JsonResult GetEvents(DateTime startDate, DateTime endDate)
