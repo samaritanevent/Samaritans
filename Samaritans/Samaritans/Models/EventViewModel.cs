@@ -59,20 +59,26 @@ namespace Samaritans.Models
 		{
 			get
 			{
-				var now = DateTime.Now;
-				var timeTil = e.EventDate - DateTime.Now;
-
-				if (timeTil <= TimeSpan.Zero)
+				if (Done)
 				{
 					return "DONE";
 				}
-				else if (timeTil >= TimeSpan.FromDays(7))
+
+				var currentDate = DateTime.Now.Date;
+				var eventDate = e.EventDate.Date;
+				var daysApart = eventDate - currentDate;
+
+				if (daysApart >= TimeSpan.FromDays(7))
 				{
 					return e.EventDate.ToString("dddd, MMMM d, h:mm tt");
 				}
-				else
+				else if (daysApart >= TimeSpan.FromDays(1))
 				{
 					return e.EventDate.ToString("dddd, h:mm tt");
+				}
+				else
+				{
+					return e.EventDate.ToString("TODAY, h:mm tt");
 				}
 			}
 		}
