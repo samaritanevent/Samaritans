@@ -20,21 +20,19 @@ namespace Samaritans.Controllers
         public ActionResult Index()
         {
             var numberGen = new Random();
-            var userId = User.Identity.GetUserId();
-            var currentUser = db.AspNetUsers.Find(userId);
-
             var results = db.Events
                 .AsEnumerable()
-                .Where(e => e.IsAttending(currentUser))
+                .Where(e => e.IsAttending(CurrentUser))
                 .Select(x => new EventListModel
                 {
+                    Id = x.Id,
                     Name = x.Name,
                     EventDate = x.EventDate,
                     MaxAttendance = x.MaxAttendance,
                     MinAttendance = x.MinAttendance,
                     Purpose = x.Purpose,
                     OrganizerName = User.Identity.GetUserName(),
-                    IsOrganizing = x.Organizer == currentUser,
+                    IsOrganizing = x.Organizer == CurrentUser,
                     DistanceFromUser = decimal.Parse($"{numberGen.Next(1, 10)}.{numberGen.Next(1, 10)}")
                 }).ToList();
 
@@ -44,9 +42,7 @@ namespace Samaritans.Controllers
         public ActionResult Details(int id)
         {
             var e = db.Events.Find(id);
-            var userId = User.Identity.GetUserId();
-            var currentUser = db.AspNetUsers.Find(userId);
-            return View(new EventViewModel(e, currentUser));
+            return View(new EventViewModel(e, CurrentUser));
         }
 
         [HttpGet]
@@ -153,7 +149,24 @@ namespace Samaritans.Controllers
         [HttpPost]
         public ActionResult Join(int id)
         {
+            var e = db.Events.Find(id);
+            var newParticipant = new Attendee
+            {
+                Event = e,
+                User = CurrentUser,
+            };
+            e.Participants.Add(newParticipant);
+            db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private AspNetUser CurrentUser
+        {
+            get
+            {
+                var userId = User.Identity.GetUserId();
+                return db.AspNetUsers.Find(userId);
+            }
         }
     }
 }
