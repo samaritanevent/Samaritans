@@ -57,6 +57,22 @@ textarea {
         background-color: #3B5998;
     }
 
+    .oauth.oauth-google:hover {
+        background-color: #e77d73;
+    }
+
+    .oauth.oauth-twitter:hover {
+        background-color: #7ebaff;
+    }
+
+    .oauth.oauth-facebook:hover {
+        background-color: #4b6498;
+    }
+
+    .oauth.oauth-linkedin:hover {
+        background-color: #5a96b6;
+    }
+
 .btn-sq-lg {
     width: 250px;
     height: 250px;
@@ -81,20 +97,17 @@ textarea {
 }
 
 
-#EventList 
-{
+#EventList {
     border: 1px solid black;
     width: 100%;
 }
 
-#EventList thead
-{
-    background-color: #34495E;
-    color: #FFF;
-    font-weight: bold;
-}
+    #EventList thead {
+        background-color: #34495E;
+        color: #FFF;
+        font-weight: bold;
+    }
 
-#EventList th, td 
-{
-    padding: .5em;
-}
+    #EventList th, td {
+        padding: .5em;
+    }

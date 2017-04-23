@@ -37,11 +37,18 @@
 
             @if (google != null)
             {
-                <button type="submit" class="btn-sq-lg oauth oauth-linkedin" id="@google.AuthenticationType" name="provider" value="@google.AuthenticationType">
+                <button type="button" class="btn-sq-lg oauth oauth-linkedin" id="linkedin" name="provider" value="@google.AuthenticationType">
                     <i class="fa fa-linkedin"></i>
                     <br />
                     Linkedin
                 </button>
+
+                <script>
+                    document.getElementById('linkedin').onclick = function() {
+                        alert('Login with Linkedin is still in the works. Sorry!');
+                        return false;
+                    };
+                </script>
             }
 
             @if (twitter != null)

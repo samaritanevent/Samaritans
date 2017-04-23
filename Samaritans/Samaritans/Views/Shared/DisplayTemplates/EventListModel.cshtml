@@ -1,7 +1,6 @@
 ﻿@model EventListModel
-    
 
-<tr class="@(Model.IsOrganizing ? "organizing" : "")">
+<tr onclick="location.href = '@(Url.Action("Details", "Event", new { id = Model.Id }))'" class="@(Model.IsOrganizing ? "organizing" : "")">
     <td>
         @Html.DisplayFor(x => x.Name)
     </td>
