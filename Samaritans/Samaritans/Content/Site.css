@@ -97,17 +97,59 @@ textarea {
 }
 
 
-#EventList {
+#EventList 
+{
     border: 1px solid black;
     width: 100%;
 }
 
-    #EventList thead {
-        background-color: #34495E;
-        color: #FFF;
-        font-weight: bold;
-    }
+#EventList thead
+{
+    background-color: #34495E;
+    color: #FFF;
+    font-weight: bold;
+}
 
-    #EventList th, td {
-        padding: .5em;
-    }
+#EventList th, td 
+{
+    padding: .5em;
+}
+
+#EventFlexBox
+{
+    text-align: center;
+}
+
+#EventFlexBox .eventCard
+{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 75%;
+    margin-bottom: 1em;
+}
+
+.eventCard 
+{
+    border: 1px solid #34495E;
+    border-top: 0;
+    padding: 0;
+    font-size: .75em;
+}
+.eventCard label
+{
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.eventCard .title
+{
+    background-color: #34495E;
+    color: #fff;
+
+}
+
+.eventCard .row
+{
+    padding: 0 1em;
+}

@@ -1,0 +1,46 @@
+﻿@model EventListModel
+
+<div class="eventCard form-horizontal">
+    <div class="form-group row title">
+        <div class="col-md-6">
+            @Html.Label("Event Name", new { @class = "content-label col-md-12" })
+            <div class="col-md-14">
+                @Html.DisplayFor(x => x.Name, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Distance", new { @class = "content-label col-md-12" })
+            <div class="col-md-14">
+                @Html.DisplayFor(x => x.DistanceFromUser, new { @class = "form-control" }) mi.
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.Label("Day of Event", new { @class = "content-label col-md-12" })
+            <div class="col-md-14">
+                @Html.DisplayFor(x => x.EventDateDisplay, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Organized By", new { @class = "content-label col-md-12" })
+            <div class="col-md-14">
+                @Html.DisplayFor(x => x.OrganizerName, new { @class = "form-control" }) mi.
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.Label("Min. Attendance", new { @class = "content-label col-md-12" })
+            <div class="col-md-14">
+                @Html.DisplayFor(x => x.MinAttendance, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Max. Attendance", new { @class = "content-label col-md-12" })
+            <div class="col-md-14">
+                @Html.DisplayFor(x => x.MaxAttendance, new { @class = "form-control" }) mi.
+            </div>
+        </div>
+    </div>
+</div>

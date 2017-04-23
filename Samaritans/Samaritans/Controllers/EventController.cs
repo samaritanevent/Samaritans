@@ -22,8 +22,8 @@ namespace Samaritans.Controllers
             var numberGen = new Random();
             var results = db.Events
                 .AsEnumerable()
-				.Where(e => e.IsAttending(CurrentUser))
-				.Select(x => new EventListModel
+                .Where(e => e.IsAttending(CurrentUser))
+                .Select(x => new EventListModel
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -32,7 +32,7 @@ namespace Samaritans.Controllers
                     MinAttendance = x.MinAttendance,
                     Purpose = x.Purpose,
                     OrganizerName = User.Identity.GetUserName(),
-					IsOrganizing = x.Organizer == CurrentUser,
+                    IsOrganizing = x.Organizer == CurrentUser,
                     DistanceFromUser = decimal.Parse($"{numberGen.Next(1, 10)}.{numberGen.Next(1, 10)}")
                 }).ToList();
 
@@ -70,6 +70,48 @@ namespace Samaritans.Controllers
 
             return View("Index");
         }
+
+        [HttpGet]
+        public ActionResult Explore()
+        {
+            return View();
+        }
+
+        public PartialViewResult ShowMore(string currentOffset)
+        {
+            var numberGen = new Random();
+
+            DateTime convertedOffset;
+
+            if (!DateTime.TryParse(currentOffset, out convertedOffset))
+            {
+                convertedOffset = DateTime.Today;
+            }
+
+            convertedOffset = convertedOffset.AddDays(7);
+
+            var results = db.Events.Where(x => x.EventDate <= convertedOffset)
+                .AsEnumerable()
+                .Select(x => new EventListModel
+                {
+                    Name = x.Name,
+                    EventDate = x.EventDate,
+                    MaxAttendance = x.MaxAttendance,
+                    MinAttendance = x.MinAttendance,
+                    Purpose = x.Purpose,
+                    OrganizerName = User.Identity.GetUserName(),
+                    DistanceFromUser = decimal.Parse($"{numberGen.Next(x.Id, x.Id + 10)}.{numberGen.Next(x.Id, x.Id + 10)}")
+                }).ToList();
+
+            var vm = new EventExploreModel
+            {
+                Events = results,
+                CurrentOffset = convertedOffset
+            };
+
+            return PartialView("_EventList", vm);
+        }
+
         public JsonResult GetEvents(DateTime startDate, DateTime endDate)
         {
             var results = new List<FullCalendarEventModel>();

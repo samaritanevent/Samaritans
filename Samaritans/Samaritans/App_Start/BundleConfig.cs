@@ -17,6 +17,9 @@ namespace Samaritans
                         "~/Scripts/fullcalendar.js",
                         "~/Scripts/EventCalendar.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/explore").Include(
+                        "~/Scripts/explore.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
