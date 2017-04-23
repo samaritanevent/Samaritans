@@ -70,6 +70,38 @@ namespace Samaritans.Controllers
 
             return View("Index");
         }
+
+        [HttpGet]
+        public ActionResult Explore()
+        {
+            return View();
+        }
+
+        public PartialViewResult ShowMore(string offset)
+        {
+            var numberGen = new Random();
+
+            DateTime convertedOffset;
+            if (!DateTime.TryParse(offset, out convertedOffset))
+            {
+                convertedOffset = DateTime.Today;
+            }
+            var results = db.Events.Where(x => x.EventDate >= convertedOffset)
+                .AsEnumerable()
+                .Select(x => new EventListModel
+                {
+                    Name = x.Name,
+                    EventDate = x.EventDate,
+                    MaxAttendance = x.MaxAttendance,
+                    MinAttendance = x.MinAttendance,
+                    Purpose = x.Purpose,
+                    OrganizerName = User.Identity.GetUserName(),
+                    DistanceFromUser = decimal.Parse($"{numberGen.Next(1, 10)}.{numberGen.Next(1, 10)}")
+                }).ToList();
+
+            return PartialView("EventCard", results ?? new List<EventListModel>());
+        }
+
         public JsonResult GetEvents(DateTime startDate, DateTime endDate)
         {
             var results = new List<FullCalendarEventModel>();

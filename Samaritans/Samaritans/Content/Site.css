@@ -98,3 +98,8 @@ textarea {
 {
     padding: .5em;
 }
+
+.eventCard 
+{
+    border: 1px solid red;
+}

@@ -417,6 +417,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\EventCalendar.js" />
+    <Content Include="Scripts\explore.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -467,6 +468,8 @@
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\EventListModel.cshtml" />
+    <Content Include="Views\Event\Explore.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\EventCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
