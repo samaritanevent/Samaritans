@@ -29,9 +29,9 @@ namespace Samaritans.Data.Entities
                     .MapLeftKey("RoleId")
                     .MapRightKey("UserId"));
 
-            modelBuilder.Entity<AspNetUser>()
+            modelBuilder.Entity<Attendee>()
                 .HasMany(e => e.Events)
-                .WithMany(e => e.Users)
+                .WithMany(e => e.Participants)
                 .Map(m => m.ToTable("Attendees")
                     .MapLeftKey("UserId")
                     .MapRightKey("EventId"));
