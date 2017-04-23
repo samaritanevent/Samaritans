@@ -19,7 +19,7 @@ using System.ComponentModel.DataAnnotations;
         public int MaxAttendance { get; set; }
 
         [Display(Name = "Organizer")]
-        public string OganizerId { get; set; }
+        public string OrganizerId { get; set; }
 
         [Display(Name = "Day of Event")]
         public DateTime EventDate { get; set; }
