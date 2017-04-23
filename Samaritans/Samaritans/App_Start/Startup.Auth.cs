@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -55,17 +56,17 @@ namespace Samaritans
             //    clientSecret: "");
 
             app.UseTwitterAuthentication(
-               consumerKey: Environment.GetEnvironmentVariable("TwitterAppID", EnvironmentVariableTarget.Machine),
-               consumerSecret: Environment.GetEnvironmentVariable("TwitterSecret", EnvironmentVariableTarget.Machine));
+               consumerKey: Environment.GetEnvironmentVariable("TwitterAppID", EnvironmentVariableTarget.Machine) ?? ConfigurationManager.AppSettings["TwitterAppID"],
+               consumerSecret: Environment.GetEnvironmentVariable("TwitterSecret", EnvironmentVariableTarget.Machine) ?? ConfigurationManager.AppSettings["TwitterSecret"]);
 
             app.UseFacebookAuthentication(
-                appId: Environment.GetEnvironmentVariable("FacebookAppID", EnvironmentVariableTarget.Machine),
-                appSecret: Environment.GetEnvironmentVariable("FacebookAppSecret", EnvironmentVariableTarget.Machine));
+                appId: Environment.GetEnvironmentVariable("FacebookAppID", EnvironmentVariableTarget.Machine) ?? ConfigurationManager.AppSettings["FacebookAppID"],
+                appSecret: Environment.GetEnvironmentVariable("FacebookAppSecret", EnvironmentVariableTarget.Machine) ?? ConfigurationManager.AppSettings["FacebookAppSecret"]);
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = Environment.GetEnvironmentVariable("GoogleClientID", EnvironmentVariableTarget.Machine),
-                ClientSecret = Environment.GetEnvironmentVariable("GoogleClientSecret", EnvironmentVariableTarget.Machine),
+                ClientId = Environment.GetEnvironmentVariable("GoogleClientID", EnvironmentVariableTarget.Machine) ?? ConfigurationManager.AppSettings["GoogleClientID"],
+                ClientSecret = Environment.GetEnvironmentVariable("GoogleClientSecret", EnvironmentVariableTarget.Machine) ?? ConfigurationManager.AppSettings["GoogleClientSecret"],
                 Provider = new GoogleOAuth2AuthenticationProvider()
                 {
                     OnAuthenticated = (context) =>
