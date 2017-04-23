@@ -1,0 +1,28 @@
+﻿@model List<EventListModel>
+@{
+    ViewBag.Title = "Your Events";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            Your Upcoming Events
+        </h4>
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <div class="form-group" id="EventFlexBox">
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-md-offset-8">
+                    <input class="btn btn-secondary" type="button" value="Show More" onclick="ShowMore()" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/explore")
+}

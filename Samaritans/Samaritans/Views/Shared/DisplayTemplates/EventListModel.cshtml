@@ -1,7 +1,5 @@
 ﻿@model EventListModel
-    
-
-<tr class="@(Model.IsOrganizing ? "organizing" : "")">
+<tr onclick="location.href = '@(Url.Action("Details", "Event", new { id = Model.Id }))'" class="@(Model.IsOrganizing ? "organizing" : "")">
    <td>
        <i class ="@(Model.IsOrganizing ? "fa fa-check greenIcon" : "")"></i>
    </td>
@@ -23,4 +21,7 @@
     <td>
         @Html.DisplayFor(x => x.DistanceFromUser) mi.
     </td>
-</tr>
+    <td>
+        @Html.ActionLink("Details", "Details", "Event", new { Model.Id }, new { })
+    </td>
+</>
