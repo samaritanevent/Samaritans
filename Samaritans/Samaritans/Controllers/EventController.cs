@@ -17,7 +17,7 @@ namespace Samaritans.Controllers
 
         public ActionResult Index()
         {
-            var results = db.Events
+            var results = db.Events.AsEnumerable()
                 .Select(x => new EventViewModel(x, x.Organizer)).ToList();
             return View(results);
         }
