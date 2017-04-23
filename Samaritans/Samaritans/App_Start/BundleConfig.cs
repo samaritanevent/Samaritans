@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace Samaritans
 {
@@ -9,7 +8,14 @@ namespace Samaritans
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/moment.js",
+                        "~/Scripts/fullcalendar.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/events").Include(
+                        "~/Scripts/moment.js",
+                        "~/Scripts/fullcalendar.js",
+                        "~/Scripts/EventCalendar.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -25,7 +31,8 @@ namespace Samaritans
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/fullcalendar.css"));
         }
     }
 }

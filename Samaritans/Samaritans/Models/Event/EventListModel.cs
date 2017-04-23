@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 namespace Samaritans.Models.Event
 {
-    public class EventCreateModel
+    public class EventListModel
     {
         public int Id { get; set; }
 
@@ -19,9 +19,21 @@ using System.ComponentModel.DataAnnotations;
         public int MaxAttendance { get; set; }
 
         [Display(Name = "Organizer")]
-        public string OrganizerId { get; set; }
+        public string OganizerId { get; set; }
+
+		[Display(Name = "IsOrganizer")]
+		public bool IsOrganizing { get; set; }
 
         [Display(Name = "Day of Event")]
         public DateTime EventDate { get; set; }
+
+        [Display(Name = "Day of Event")]
+        public string EventDateDisplay => $"{EventDate:MM/dd/yyyy}";
+
+        [Display(Name = "Organizer")]
+        public string OrganizerName { get; set; }
+
+        [Display(Name = "Distance from User")]
+        public decimal DistanceFromUser { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Samaritans.Data.Entities
 {
@@ -31,5 +32,11 @@ namespace Samaritans.Data.Entities
 
         public virtual ICollection<Attendee> Participants { get; set; }
         public virtual ICollection<Resource> Resources { get; set; }
+
+		public bool IsAttending(AspNetUser user)
+		{
+			return Organizer == user ||
+				Participants.Any(x => x.User == user);
+		}
     }
 }
