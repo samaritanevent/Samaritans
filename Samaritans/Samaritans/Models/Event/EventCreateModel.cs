@@ -14,7 +14,7 @@
 
         public int MaxAttendance { get; set; }
 
-        public string OganizerId { get; set; }
+        public string OrganizerId { get; set; }
 
         public DateTime EventDate { get; set; }
     }

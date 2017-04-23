@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data.Entity;
 
 namespace Samaritans.Data.Entities
@@ -10,7 +11,7 @@ namespace Samaritans.Data.Entities
         }
 
 
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual ISet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
