@@ -54,7 +54,6 @@ namespace Samaritans.Controllers
         [HttpPost]
         public ActionResult Create(EventCreateModel eventModel)
         {
-            // ToDo: Replace with custom Create view model.
             var eventEntity = new Event
             {
                 Name = eventModel.Name,
@@ -132,7 +131,6 @@ namespace Samaritans.Controllers
                         : "EventFull"
                 });
             }
-
 
             return Json(results, JsonRequestBehavior.AllowGet);
         }
