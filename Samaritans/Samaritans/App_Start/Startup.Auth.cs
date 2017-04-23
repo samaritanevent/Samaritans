@@ -54,9 +54,9 @@ namespace Samaritans
             //    clientId: "",
             //    clientSecret: "");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            app.UseTwitterAuthentication(
+               consumerKey: Environment.GetEnvironmentVariable("TwitterAppID", EnvironmentVariableTarget.Machine),
+               consumerSecret: Environment.GetEnvironmentVariable("TwitterSecret", EnvironmentVariableTarget.Machine));
 
             app.UseFacebookAuthentication(
                 appId: Environment.GetEnvironmentVariable("FacebookAppID", EnvironmentVariableTarget.Machine),

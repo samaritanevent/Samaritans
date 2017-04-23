@@ -9,6 +9,13 @@
     <h1>@ViewBag.AppName</h1>
     <p class="lead">A casual way to volunteer for short periods of time, occasionally.</p>
 </div>
+@if (ViewBag.FailedLogin != null && (bool)ViewBag.FailedLogin)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        <strong>Oh snap!</strong> Something didn't work just then, try again?
+    </div>
+}
+
 @if (!User.Identity.IsAuthenticated)
 {
     @Html.Partial("~/Views/Account/_ExternalLoginsListPartial.cshtml", Model)
