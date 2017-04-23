@@ -17,14 +17,14 @@ namespace Samaritans.Controllers
 
         public ActionResult Index()
         {
-            var results = db.Events
+            var results = db.Events.AsEnumerable()
                 .Select(x => new EventViewModel(x, x.Organizer)).ToList();
             return View(results);
         }
 
-        public ActionResult Details(int index)
+        public ActionResult Details(int id)
         {
-            var e = db.Events.Find(index);
+            var e = db.Events.Find(id);
             var userId = User.Identity.GetUserId();
             var currentUser = db.AspNetUsers.Find(userId);
             return View(new EventViewModel(e, currentUser));
