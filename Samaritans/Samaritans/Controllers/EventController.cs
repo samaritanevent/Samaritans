@@ -31,7 +31,7 @@ namespace Samaritans.Controllers
                     MaxAttendance = x.MaxAttendance,
                     MinAttendance = x.MinAttendance,
                     Purpose = x.Purpose,
-                    OrganizerName = User.Identity.GetUserName(),
+                    OrganizerName = x.Organizer.UserName,
                     IsOrganizing = x.Organizer == CurrentUser,
                     DistanceFromUser = decimal.Parse($"{numberGen.Next(1, 10)}.{numberGen.Next(1, 10)}")
                 }).ToList();
@@ -99,7 +99,7 @@ namespace Samaritans.Controllers
                     MaxAttendance = x.MaxAttendance,
                     MinAttendance = x.MinAttendance,
                     Purpose = x.Purpose,
-                    OrganizerName = User.Identity.GetUserName(),
+                    OrganizerName = x.Organizer.UserName,
                     DistanceFromUser = decimal.Parse($"{numberGen.Next(x.Id, x.Id + 10)}.{numberGen.Next(x.Id, x.Id + 10)}")
                 }).ToList();
 
