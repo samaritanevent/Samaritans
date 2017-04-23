@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Samaritans.Models;
 using System.Web.Mvc;
-using Samaritans.Models;
 
 namespace Samaritans.Controllers
 {
@@ -14,7 +10,7 @@ namespace Samaritans.Controllers
         {
             ViewBag.FailedLogin = TempData["FailedLogin"];
 
-            //if (!User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
             {
                 var model = new ExternalLoginListViewModel()
                 {
@@ -23,10 +19,10 @@ namespace Samaritans.Controllers
 
                 return View(model);
             }
-            //else
-            //{
-            //    return RedirectToAction("Index", "Event");
-            //}
+            else
+            {
+                return RedirectToAction("Explore", "Event");
+            }
 
         }
 
