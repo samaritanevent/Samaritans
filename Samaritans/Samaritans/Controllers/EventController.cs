@@ -2,6 +2,7 @@
 using Samaritans.Data.Entities;
 using Samaritans.Models.Event;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -69,6 +70,29 @@ namespace Samaritans.Controllers
 
             return View("Index");
         }
+        public JsonResult GetEvents(DateTime startDate, DateTime endDate)
+        {
+            var results = new List<FullCalendarEventModel>();
 
+            foreach (var eventRecord in db.Events.Where(x => x.EventDate >= startDate && x.EventDate <= endDate))
+            {
+                //TimeSpan variable = datevalue1 - datevalue2;
+                results.Add(new FullCalendarEventModel()
+                {
+                    id = eventRecord.Id.ToString(),
+                    title = "An Event!",
+                    start = eventRecord.EventDate,
+                    end = eventRecord.EventDate.AddDays(1),
+                    backgroundColor = "#C2C2C2",
+                    url = Url.Action("Details", "Event", new { id = eventRecord.Id }),
+                    className = eventRecord.MinAttendance != eventRecord.MaxAttendance
+                        ? ""
+                        : "EventFull"
+                });
+            }
+
+
+            return Json(results, JsonRequestBehavior.AllowGet);
+        }
     }
 }

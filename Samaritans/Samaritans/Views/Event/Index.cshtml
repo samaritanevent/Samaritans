@@ -19,11 +19,6 @@
         <div class="form-horizontal">
             <div class="form-group row">
                 <div class="col-md-12">
-                    <div id="calendar"></div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-md-12">
                     @if(Model != null && Model.Any())
                     {
                         <table id="EventList">
@@ -56,31 +51,16 @@
                     }
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <div id="calendar"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<script>
-    $(document).ready(function ()
-    {
-        $("#calendar").fullCalendar({
-            events: function (start, end, timezone, callback)
-            {
-                $.ajax({
-                    url: "/ProjectCalendar/GetEvents",
-                    dataType: "json",
-                    data: {
-                        startDate: start.toISOString(),
-                        endDate: end.toISOString()
-                    },
-                    success: function (data)
-                    {
-                        callback(data);
-                    }
-                });
-            }
-        });
-    });
-
-
-</script>
+@section scripts
+{
+    @Scripts.Render("~/bundles/events")
+}
