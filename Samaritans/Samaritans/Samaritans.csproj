@@ -389,6 +389,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Event.css" />
     <Content Include="Content\flat-ui.css" />
     <Content Include="Content\flat-ui.min.css" />
     <Content Include="Content\font-awesome.css" />

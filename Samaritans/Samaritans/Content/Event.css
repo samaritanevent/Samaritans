@@ -1,0 +1,16 @@
+﻿body {
+}
+
+.redIcon{
+    color:red;
+}
+
+.greenIcon{
+    color:green;
+}
+.attenderStatus{
+    font-size:15px;
+}
+.obsolete{
+    opacity:.5;
+}
