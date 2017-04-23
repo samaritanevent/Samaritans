@@ -1,0 +1,64 @@
+﻿@model EventViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<div class="panel">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            New Event Details
+        </h4>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Create", "Event"))
+        {
+            <div class="form-horizontal">
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.Name, new { @class = "content-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.EventDate, new { @class = "content-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(x => x.EventDate, new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.MinAttendance, new { @class = "content-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(x => x.MinAttendance, new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.MaxAttendance, new { @class = "content-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(x => x.MaxAttendance, new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.Purpose, new { @class = "content-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(x => x.Purpose, new { @class = "form-control", rows = 2 })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <div class="col-md-8">
+                            <input type="submit" class="btn btn-primary" value="submit" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

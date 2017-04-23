@@ -1,48 +1,40 @@
 ﻿using Samaritans.Data.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace Samaritans.Models
 {
-	public class EventViewModel
-	{
-		private Event e { get; set; }
+    public class EventViewModel
+    {
+        public EventViewModel(Event e)
+        {
+            this.Name = e.Name;
+            this.EventDate = e.EventDate;
+            this.MaxAttendance = e.MaxAttendance;
+            this.MinAttendance = e.MinAttendance;
+            this.Purpose = e.Purpose;
+        }
 
-		public EventViewModel(Event e)
-		{
-			this.e = e;
-		}
+        public EventViewModel()
+        {
+        }
 
-		public string Name
-		{
-			get { return e.Name; }
-		}
+        [Display(Name = "Event Name")]
+        public string Name { get; set; }
 
-		public string Purpose
-		{
-			get { return e.Purpose; }
-		}
+        [Display(Name = "Purpose of Event")]
+        public string Purpose { get; set; }
 
-		public DateTime EventDate
-		{
-			get { return e.EventDate; }
-		}
+        [Display(Name = "Event Date")]
+        public DateTime EventDate { get; set; }
 
-		public int MinAttendance
-		{
-			get { return e.MinAttendance; }
-		}
+        [Display(Name = "Minimum Attendees")]
+        public int MinAttendance { get; set; }
 
-		public int MaxAttendance
-		{
-			get { return e.MaxAttendance; }
-		}
+        [Display(Name = "Max Attendees")]
+        public int MaxAttendance { get; set; }
 
-		public string OrganizerName
-		{
-			get { return e.Organizer.UserName; }
-		}
-	}
+        [Display(Name = "Organizer Name")]
+        public string OrganizerName { get; set; }
+    }
 }

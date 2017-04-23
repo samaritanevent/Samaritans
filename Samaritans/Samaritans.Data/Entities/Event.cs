@@ -8,29 +8,29 @@ namespace Samaritans.Data.Entities
     {
         public Event()
         {
-			Participants = new HashSet<Attendee>();
-			Resources = new HashSet<Resource>();
-		}
+            Participants = new HashSet<Attendee>();
+            Resources = new HashSet<Resource>();
+        }
 
-		public int Id { get; set; }
+        public int Id { get; set; }
 
-		[Required]
-		public string OrganizerId { get; set; }
+        [Required]
+        public string OrganizerId { get; set; }
 
-		[Required]
-		public string Name { get; set; }
-		public string Purpose { get; set; }
+        [Required]
+        public string Name { get; set; }
+        public string Purpose { get; set; }
 
-		public int MinAttendance { get; set; }
-		public int MaxAttendance { get; set; }
+        public int MinAttendance { get; set; }
+        public int MaxAttendance { get; set; }
 
-		[Required]
-		public DateTime EventDate { get; set; }
+        [Required]
+        public DateTime EventDate { get; set; }
 
-		[Required]
+        [Required]
         public AspNetUser Organizer { get; set; }
 
-		public virtual ICollection<Attendee> Participants { get; set; }
-		public virtual ICollection<Resource> Resources { get; set; }
+        public virtual ICollection<Attendee> Participants { get; set; }
+        public virtual ICollection<Resource> Resources { get; set; }
     }
 }
