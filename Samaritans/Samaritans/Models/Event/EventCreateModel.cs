@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Samaritans.Models
+namespace Samaritans.Models.Event
 {
     public class EventCreateModel
     {

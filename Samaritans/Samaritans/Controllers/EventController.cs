@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Samaritans.Data.Entities;
-using Samaritans.Models;
+using Samaritans.Models.Event;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Samaritans.Controllers
@@ -16,8 +17,9 @@ namespace Samaritans.Controllers
 
         public ActionResult Index()
         {
-
-            return View();
+            var results = db.Events
+                .Select(x => new EventViewModel(x, x.Organizer)).ToList();
+            return View(results);
         }
 
         public ActionResult Details(int index)
