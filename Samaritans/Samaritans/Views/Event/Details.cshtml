@@ -1,36 +1,39 @@
 ﻿@model Samaritans.Models.Event.EventViewModel
 @{
-	ViewBag.Title = Model.Name;
+    ViewBag.Title = Model.Name;
 }
 
 <article class="event @(Model.Obsolete ? "obsolete" : "")">
 	@if (Model.IsHosting || Model.IsAttending)
-	{
-		<i class="fa fa-check"></i>
-		<h2 class="@(Model.IsHosting ? "hosting" : "attending")">@Model.Name</h2>
-		<p>@Model.AttendanceDisplay</p>
-	}
-	else
-	{
-		<h2>@Model.Name</h2>
-	}
+    {
+
+		<h2 class="@(Model.IsHosting ? "hosting" : "attending")" > <i class="fa fa-check greenIcon"></i> @Model.Name</h2>
+		<p class="attenderStatus">(@Model.AttendanceDisplay)</p>
+
+    }
+    else
+    {
+		<h2><i class="fa fa-times redIcon"></i>@Model.Name</h2>
+    }
 	<div class="organizer">
 		<span>@Model.OrganizerName</span>
 	</div>
-	<div>@Model.TimeDisplay</div>
+	<div> @Model.TimeDisplay</div>
 	<div class="@(Model.CapacityWarning ? "warn" : "")">@Model.Attendance</div>
 	<p>@Model.Purpose</p>
 
 	@if (Model.IsHosting && !Model.Done)
-	{
-		<form> 
-			<input type="submit" value="Cancel" class="btn btn-danger" />
- 		</form>
-	}
-	else if (!Model.IsAttending && !Model.Obsolete)
-	{
-		<form>
-			<input type="submit" value="Join" class="btn btn-success" />
-		</form>
-	}
+    {
+        using (Html.BeginForm("Cancel", "Event", new { id = Model.Id }, FormMethod.Post, new { onsubmit = "return confirm('Are you sure you want to cancel this event?')" }))
+        {
+            <input class="btn btn-danger" type="submit" value="Cancel" />
+        }
+    }
+    else if (!Model.IsAttending && !Model.Obsolete)
+    {
+        using (Html.BeginForm("Join", "Event", new { id = Model.Id }, FormMethod.Post))
+        {
+            <input class="btn btn-success" type="submit" value="Join" />
+        }
+    }
 </article>

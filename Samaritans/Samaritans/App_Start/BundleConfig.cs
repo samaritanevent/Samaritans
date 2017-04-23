@@ -35,7 +35,10 @@ namespace Samaritans
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/fullcalendar.css"));
+                      "~/Content/fullcalendar.css",
+                      "~/Content/Event.css"
+                      ));
+
         }
     }
 }

@@ -325,7 +325,8 @@ namespace Samaritans.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
-                throw new Exception($"AuthenticationManager.GetExternalLoginInfoAsync Returned Null");
+                TempData["FailedLogin"] = true;
+                return RedirectToAction("Index", "Home");
             }
 
             // Sign in the user with this external login provider if the user already has a login

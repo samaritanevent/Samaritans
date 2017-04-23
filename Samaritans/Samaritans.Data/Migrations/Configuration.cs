@@ -31,15 +31,15 @@ namespace Samaritans.Data.Migrations
             //  This method will be called after migrating to the latest version.
             var eventList = new List<Event>
             {
-                new Event { OrganizerId = userId, Name="Lindsey Lowe", MaxAttendance=10, MinAttendance=4, Purpose="Clean up Lakewood Park Pavilion", EventDate = DateTime.ParseExact("05-05-2017 08:00", "dd-MM-yyyy HH:mm", null) },
-                new Event { OrganizerId=userId, Name="Allen Yu", MaxAttendance=10, MinAttendance=5, Purpose="Build fences around Tremon Montessori School", EventDate = DateTime.ParseExact("04-27-2017 10:00", "dd-MM-yyyy HH:mm", null)   },
-                new Event { OrganizerId=userId, Name="Andrew Diamond", MaxAttendance=12, MinAttendance=5, Purpose="Rocky River Marina litter pick-up", EventDate = DateTime.ParseExact("04-29-2017 14:00", "dd-MM-yyyy HH:mm", null) },
-                new Event { OrganizerId=userId, Name="Josh Graber", MaxAttendance=15, MinAttendance=10, Purpose="Ohio City Festival post-fest street clean", EventDate = DateTime.ParseExact("04-29-2017 12:00", "dd-MM-yyyy HH:mm", null) },
-                new Event { OrganizerId=userId, Name="Lily Krichels", MaxAttendance=10, MinAttendance=3, Purpose="5K Walk/Run in Lakewood- hand out water to marchers!", EventDate = DateTime.ParseExact("04-30-2017 13:00", "dd-MM-yyyy HH:mm", null) },
-                new Event { OrganizerId=userId, Name="Sean Martz", MaxAttendance=8, MinAttendance=3, Purpose="Plant Community Garden- W 32nd & Penn Ohio City",EventDate = DateTime.ParseExact("05-06-2017 12:00", "dd-MM-yyyy HH:mm", null) }
+                new Event { OrganizerId=userId, Name="Lindsey Lowe", MaxAttendance=10, MinAttendance=4, Purpose="Clean up Lakewood Park Pavilion", EventDate = DateTime.Now.AddDays(1)},
+                new Event { OrganizerId=userId, Name="Allen Yu", MaxAttendance=10, MinAttendance=5, Purpose="Build fences around Tremon Montessori School", EventDate = DateTime.Now.AddDays(2)},
+                new Event { OrganizerId=userId, Name="Andrew Diamond", MaxAttendance=12, MinAttendance=5, Purpose="Rocky River Marina litter pick-up", EventDate = DateTime.Now.AddDays(3) },
+                new Event { OrganizerId=userId, Name="Josh Graber", MaxAttendance=15, MinAttendance=10, Purpose="Ohio City Festival post-fest street clean", EventDate = DateTime.Now.AddDays(7)},
+                new Event { OrganizerId=userId, Name="Lily Krichels", MaxAttendance=10, MinAttendance=3, Purpose="5K Walk/Run in Lakewood- hand out water to marchers!", EventDate = DateTime.Now.AddDays(13) },
+                new Event { OrganizerId=userId, Name="Sean Martz", MaxAttendance=8, MinAttendance=3, Purpose="Plant Community Garden- W 32nd & Penn Ohio City",EventDate = DateTime.Now.AddDays(10) }
             };
-            eventList.ForEach(e => context.Events.AddOrUpdate( prop=> prop.Id, e));
-            context.SaveChanges();
+           context.Events.AddOrUpdate( prop => prop.Id, eventList.ToArray());
+           context.SaveChanges();
         }
     }
 }

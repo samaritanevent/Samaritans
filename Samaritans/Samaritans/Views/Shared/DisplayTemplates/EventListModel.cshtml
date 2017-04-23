@@ -1,7 +1,7 @@
 ﻿@model EventListModel
     
 
-<tr>
+<tr class="@(Model.IsOrganizing ? "organizing" : "")">
     <td>
         @Html.DisplayFor(x => x.Name)
     </td>

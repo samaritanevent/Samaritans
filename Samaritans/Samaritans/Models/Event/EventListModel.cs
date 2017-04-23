@@ -21,6 +21,9 @@ using System.ComponentModel.DataAnnotations;
         [Display(Name = "Organizer")]
         public string OganizerId { get; set; }
 
+		[Display(Name = "IsOrganizer")]
+		public bool IsOrganizing { get; set; }
+
         [Display(Name = "Day of Event")]
         public DateTime EventDate { get; set; }
 
