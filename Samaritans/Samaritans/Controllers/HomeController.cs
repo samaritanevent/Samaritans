@@ -12,11 +12,20 @@ namespace Samaritans.Controllers
     {
         public ActionResult Index()
         {
-            var model = new ExternalLoginListViewModel()
+            //if (!User.Identity.IsAuthenticated)
             {
-                ReturnUrl = null
-            };
-            return View(model);
+                var model = new ExternalLoginListViewModel()
+                {
+                    ReturnUrl = null
+                };
+
+                return View(model);
+            }
+            //else
+            {
+                return RedirectToAction("Index", "Event");
+            }
+
         }
 
         public ActionResult About()
