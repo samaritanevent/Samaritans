@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Samaritans.Models.Event.EventViewModel>
 @{
     ViewBag.Title = "Index";
 }
@@ -13,6 +13,10 @@
         </h4>
     </div>
     <div class="panel-body">
+		@foreach (var e in Model)
+		{
+			<div>@e.Name</div>
+		}
         <div class="form-horizontal">
             <div class="form-group row">
                 <div class="col-md-12">
