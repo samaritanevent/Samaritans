@@ -28,6 +28,7 @@ namespace Samaritans.Controllers
 				.Where(e => e.IsAttending(currentUser))
 				.Select(x => new EventListModel
                 {
+                    Id = x.Id,
                     Name = x.Name,
                     EventDate = x.EventDate,
                     MaxAttendance = x.MaxAttendance,

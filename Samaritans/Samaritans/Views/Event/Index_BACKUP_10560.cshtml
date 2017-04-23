@@ -4,18 +4,34 @@
 }
 
 <h2>Your Events</h2>
+
+<div>
+    @Html.ActionLink("Create New Event", "Create", "Event")
+</div>
+
 <div class="panel">
     <div class="panel-heading">
         <h4 class="panel-title">
+            Your Upcoming Events
         </h4>
     </div>
     <div class="panel-body">
+<<<<<<< Updated upstream
+=======
+		@foreach (var e in Model)
+		{
+		    <div>@e.Name</div>
+            
+		    <div>@e.Purpose</div>
+
+		}
+>>>>>>> Stashed changes
         <div class="form-horizontal">
             <div class="form-group row">
                 <div class="col-md-12">
                     @if(Model != null && Model.Any())
                     {
-                        <table id="EventList" class="table table-striped table-hover" style="cursor:pointer">
+                        <table id="EventList">
                         <thead>
                             <tr>
                                 <th>
@@ -42,10 +58,6 @@
                             @Html.DisplayFor(x => x)
                         </tbody>
                         </table>
-                    }
-                    @if (Model == null || !Model.Any())
-                    {
-                        <div class="text-center"> You haven't signed up for anything yet.<i class="fa-frown-o"></i></div>
                     }
                 </div>
             </div>
