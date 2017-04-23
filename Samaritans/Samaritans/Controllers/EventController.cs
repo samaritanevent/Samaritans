@@ -68,7 +68,7 @@ namespace Samaritans.Controllers
             db.Events.Add(eventEntity);
             db.SaveChanges();
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
