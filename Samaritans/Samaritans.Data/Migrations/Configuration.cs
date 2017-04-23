@@ -8,6 +8,7 @@ namespace Samaritans.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(Entities.DoGooderDb context)

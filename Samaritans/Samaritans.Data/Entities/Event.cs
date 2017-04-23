@@ -26,8 +26,7 @@ namespace Samaritans.Data.Entities
 
         [Required]
         public DateTime EventDate { get; set; }
-
-        [Required]
+        
         public AspNetUser Organizer { get; set; }
 
         public virtual ICollection<Attendee> Participants { get; set; }
