@@ -389,6 +389,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Event.css" />
     <Content Include="Content\flat-ui.css" />
     <Content Include="Content\flat-ui.min.css" />
     <Content Include="Content\font-awesome.css" />
@@ -412,7 +413,9 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <None Include="Properties\PublishProfiles\dogooder - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\dogooder - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\dogooder - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\dogooder - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
