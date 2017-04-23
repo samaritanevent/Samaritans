@@ -20,10 +20,13 @@ namespace Samaritans.Controllers
         public ActionResult Index()
         {
             var numberGen = new Random();
+			var userId = User.Identity.GetUserId();
+			var currentUser = db.AspNetUsers.Find(userId);
 
             var results = db.Events
                 .AsEnumerable()
-                .Select(x => new EventListModel
+				.Where(e => e.IsAttending(currentUser))
+				.Select(x => new EventListModel
                 {
                     Name = x.Name,
                     EventDate = x.EventDate,
@@ -31,6 +34,7 @@ namespace Samaritans.Controllers
                     MinAttendance = x.MinAttendance,
                     Purpose = x.Purpose,
                     OrganizerName = User.Identity.GetUserName(),
+					IsOrganizing = x.Organizer == currentUser,
                     DistanceFromUser = decimal.Parse($"{numberGen.Next(1, 10)}.{numberGen.Next(1, 10)}")
                 }).ToList();
 
