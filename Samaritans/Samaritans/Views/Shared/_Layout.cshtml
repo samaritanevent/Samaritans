@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - @ViewBag.AppName</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/font-awesome.min.css")
+    @Styles.Render("~/Content/flat-ui.min.css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -29,15 +30,15 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer class="text-center">
+        <div class="content">
+            @RenderBody()
+        </div>
+        <footer class="navbar-fixed-bottom padding">
             <p>&copy; @DateTime.Now.Year - @ViewBag.AppName</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css"/>
     @RenderSection("scripts", required: false)
 </body>
 </html>

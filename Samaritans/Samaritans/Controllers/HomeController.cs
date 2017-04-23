@@ -22,9 +22,9 @@ namespace Samaritans.Controllers
                 return View(model);
             }
             //else
-            {
-                return RedirectToAction("Index", "Event");
-            }
+            //{
+            //    return RedirectToAction("Index", "Event");
+            //}
 
         }
 
