@@ -4,13 +4,6 @@ namespace Samaritans.Data.Entities
 {
     public class Attendee
     {
-        public Attendee()
-        {
-            Users = new HashSet<AspNetUser>();
-            Events = new HashSet<Event>();
-            Resources = new HashSet<Resource>();
-        }
-
         public int Id { get; set; }
 
         public string UserId { get; set; }
@@ -21,10 +14,10 @@ namespace Samaritans.Data.Entities
 
         public decimal Quantity { get; set; }
 
-        public virtual ICollection<AspNetUser> Users { get; set; }
+        public virtual AspNetUser User { get; set; }
 
-        public virtual ICollection<Event> Events { get; set; }
+        public virtual Event Event { get; set; }
 
-        public virtual ICollection<Resource> Resources { get; set; }
+        public virtual Resource Resource { get; set; }
     }
 }

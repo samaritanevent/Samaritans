@@ -1,40 +1,153 @@
 ﻿using Samaritans.Data.Entities;
 using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace Samaritans.Models
 {
-    public class EventViewModel
-    {
-        public EventViewModel(Event e)
-        {
-            this.Name = e.Name;
-            this.EventDate = e.EventDate;
-            this.MaxAttendance = e.MaxAttendance;
-            this.MinAttendance = e.MinAttendance;
-            this.Purpose = e.Purpose;
-        }
+	public class EventViewModel
+	{
+		private Event e;
+		private AspNetUser currentUser;
 
-        public EventViewModel()
-        {
-        }
+		public EventViewModel(Event e, AspNetUser currentUser)
+		{
+			this.e = e;
+			this.currentUser = currentUser;
+		}
 
-        [Display(Name = "Event Name")]
-        public string Name { get; set; }
+		public string Name
+		{
+			get { return e.Name; }
+		}
 
-        [Display(Name = "Purpose of Event")]
-        public string Purpose { get; set; }
+		public string Purpose
+		{
+			get { return e.Purpose; }
+		}
 
-        [Display(Name = "Event Date")]
-        public DateTime EventDate { get; set; }
+		public bool Obsolete
+		{
+			get
+			{
+				return IsFull || Done;
+			}
+		}
 
-        [Display(Name = "Minimum Attendees")]
-        public int MinAttendance { get; set; }
+		public bool IsFull
+		{
+			get { return e.Participants.Count >= e.MaxAttendance; }
+		}
 
-        [Display(Name = "Max Attendees")]
-        public int MaxAttendance { get; set; }
+		public bool Done
+		{
+			get	{ return DateTime.Now > e.EventDate; }
+		}
 
-        [Display(Name = "Organizer Name")]
-        public string OrganizerName { get; set; }
-    }
+		public bool IsHosting
+		{
+			get { return e.Organizer == currentUser; }
+		}
+
+		public bool IsAttending
+		{
+			get { return e.Participants.Any(p => p.User == currentUser); }
+		}
+
+		public string TimeDisplay
+		{
+			get
+			{
+				if (Done)
+				{
+					return "DONE";
+				}
+
+				var currentDate = DateTime.Now.Date;
+				var eventDate = e.EventDate.Date;
+				var daysApart = eventDate - currentDate;
+
+				if (daysApart >= TimeSpan.FromDays(7))
+				{
+					return e.EventDate.ToString("dddd, MMMM d, h:mm tt");
+				}
+				else if (daysApart >= TimeSpan.FromDays(1))
+				{
+					return e.EventDate.ToString("dddd, h:mm tt");
+				}
+				else
+				{
+					return e.EventDate.ToString("TODAY, h:mm tt");
+				}
+			}
+		}
+
+		public string AttendanceDisplay
+		{
+			get
+			{
+				if (IsHosting)
+				{
+					return "You are hosting this event";
+				}
+				else if (IsAttending)
+				{
+					return "You are attending this event";
+				}
+				else
+				{
+					return null;
+				}
+			}
+		}
+
+		public bool CapacityWarning
+		{
+			get
+			{
+				return IsFull || BelowCapacity;
+			}
+		}
+
+		public bool BelowCapacity
+		{
+			get { return e.Participants.Count < e.MinAttendance; }
+		}
+
+		public string Attendance
+		{
+			get
+			{
+				if (BelowCapacity)
+				{
+					var pattern = "{0} of {1} volunteers";
+					return string.Format(pattern, e.Participants.Count, e.MaxAttendance);
+				}
+				else if (IsFull)
+				{
+					return string.Format("FULL, {0} volunteers", e.Participants.Count);
+				}
+				else
+				{
+					return string.Format("{0} volunteers", e.Participants.Count);
+				}
+			}
+		}
+
+		public int MinAttendance
+		{
+			get { return e.MinAttendance; }
+		}
+
+		public int MaxAttendance
+		{
+			get { return e.MaxAttendance; }
+		}
+
+		public string OrganizerName
+		{
+			get { return e.Organizer.UserName; }
+		}
+	}
 }
