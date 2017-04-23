@@ -16,6 +16,11 @@ namespace Samaritans.Models.Event
             this.currentUser = currentUser;
         }
 
+        public int Id
+        {
+            get { return e.Id; }
+        }
+
         [Display(Name = "Event Name")]
         public string Name
         {
