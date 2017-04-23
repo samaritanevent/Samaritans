@@ -51,6 +51,8 @@ namespace Samaritans.Data.Entities
 
         public virtual ICollection<Rating> Ratings { get; set; }
 
+		public virtual ICollection<Attendee> Attendances { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
 

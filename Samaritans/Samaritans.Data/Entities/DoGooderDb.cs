@@ -30,13 +30,16 @@ namespace Samaritans.Data.Entities
                     .MapRightKey("UserId"));
 
             modelBuilder.Entity<Attendee>()
-                .HasMany(e => e.Events)
-                .WithMany(e => e.Participants)
-                .Map(m => m.ToTable("Attendees")
-                    .MapLeftKey("UserId")
-                    .MapRightKey("EventId"));
+	            .HasRequired(e => e.User)
+                .WithMany(e => e.Attendances)
+				.WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<AspNetUser>()
+			modelBuilder.Entity<Attendee>()
+				.HasRequired(e => e.Event)
+				.WithMany(e => e.Participants)
+				.WillCascadeOnDelete(false);
+
+			modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.AspNetUserClaims)
                 .WithRequired(e => e.AspNetUser)
                 .HasForeignKey(e => e.UserId);
