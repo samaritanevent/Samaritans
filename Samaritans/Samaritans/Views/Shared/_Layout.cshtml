@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - @ViewBag.AppName</title>
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/font-awesome.min.css");
+    @Styles.Render("~/Content/font-awesome.min.css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -20,15 +20,12 @@
                 </button>
                 @Html.ActionLink("Do Gooder", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-           @if (!User.Identity.IsAuthenticated)
-           {
-               <div class="navbar-collapse collapse">
-                   <ul class="nav navbar-nav">
-                       <li>@Html.ActionLink("My Events", "Index", "Event")</li>
-                   </ul>
-                   @Html.Partial("_LoginPartial")
-               </div>
-           }
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("My Events", "Index", "Event")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
         </div>
     </div>
     <div class="container body-content">
@@ -40,7 +37,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css"/>
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -10,7 +10,7 @@
     <p class="lead">A casual way to volunteer for short periods of time, occasionally.</p>
 </div>
 
-@if(!User.Identity.IsAuthenticated)
+@if (!User.Identity.IsAuthenticated)
 {
     @Html.Partial("~/Views/Account/_ExternalLoginsListPartial.cshtml", Model)
 }
