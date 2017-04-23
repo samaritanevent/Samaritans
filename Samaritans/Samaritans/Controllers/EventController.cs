@@ -93,6 +93,7 @@ namespace Samaritans.Controllers
                 .AsEnumerable()
                 .Select(x => new EventListModel
                 {
+                    Id = x.Id,
                     Name = x.Name,
                     EventDate = x.EventDate,
                     MaxAttendance = x.MaxAttendance,
