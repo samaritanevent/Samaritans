@@ -8,6 +8,8 @@ namespace Samaritans.Data.Entities
         public DoGooderDb()
             : base("name=DoGooderDb")
         {
+            Configuration.LazyLoadingEnabled = true;
+            Configuration.ProxyCreationEnabled = true;
         }
 
 
@@ -31,16 +33,16 @@ namespace Samaritans.Data.Entities
                     .MapRightKey("UserId"));
 
             modelBuilder.Entity<Attendee>()
-	            .HasRequired(e => e.User)
+                .HasRequired(e => e.User)
                 .WithMany(e => e.Attendances)
-				.WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);
 
-			modelBuilder.Entity<Attendee>()
-				.HasRequired(e => e.Event)
-				.WithMany(e => e.Participants)
-				.WillCascadeOnDelete(false);
+            modelBuilder.Entity<Attendee>()
+                .HasRequired(e => e.Event)
+                .WithMany(e => e.Participants)
+                .WillCascadeOnDelete(false);
 
-			modelBuilder.Entity<AspNetUser>()
+            modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.AspNetUserClaims)
                 .WithRequired(e => e.AspNetUser)
                 .HasForeignKey(e => e.UserId);

@@ -3,6 +3,7 @@ using Samaritans.Data.Entities;
 using Samaritans.Models.Event;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -31,7 +32,7 @@ namespace Samaritans.Controllers
                     MaxAttendance = x.MaxAttendance,
                     MinAttendance = x.MinAttendance,
                     Purpose = x.Purpose,
-                    OrganizerName = x.Organizer.UserName,
+                    OrganizerName = x.Organizer?.UserName ?? "N/A",
                     IsOrganizing = x.Organizer == CurrentUser,
                     DistanceFromUser = decimal.Parse($"{numberGen.Next(1, 10)}.{numberGen.Next(1, 10)}")
                 }).ToList();
@@ -90,6 +91,7 @@ namespace Samaritans.Controllers
             convertedOffset = convertedOffset.AddDays(7);
 
             var results = db.Events.Where(x => x.EventDate <= convertedOffset)
+                .Include("Organizer")
                 .AsEnumerable()
                 .Select(x => new EventListModel
                 {
@@ -99,7 +101,7 @@ namespace Samaritans.Controllers
                     MaxAttendance = x.MaxAttendance,
                     MinAttendance = x.MinAttendance,
                     Purpose = x.Purpose,
-                    OrganizerName = x.Organizer?.UserName ?? (numberGen.Next(1, 3) % 3 == 1 ? "John@yahoo.com" : "Steve@gmail.com"),
+                    OrganizerName = x.Organizer?.UserName ?? "N/A",
                     DistanceFromUser = decimal.Parse($"{numberGen.Next(x.Id, x.Id + 10)}.{numberGen.Next(x.Id, x.Id + 10)}")
                 }).ToList();
 
