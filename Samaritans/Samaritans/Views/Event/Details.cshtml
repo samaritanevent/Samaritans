@@ -3,7 +3,7 @@
     ViewBag.Title = Model.Name;
 }
 
-<article class="event @(Model.Obsolete ? "obsolete" : "")">
+<article class="event @(Model.Obsolete ? "obsolete" : "") @(Model.CapacityWarning ? "warn" : "")">
 	@if (Model.IsHosting || Model.IsAttending)
     {
 
@@ -19,7 +19,7 @@
 		<span>@Model.OrganizerName</span>
 	</div>
 	<div> @Model.TimeDisplay</div>
-	<div class="@(Model.CapacityWarning ? "warn" : "")">@Model.Attendance</div>
+	<div class="">@Model.Attendance</div>
 	<p>@Model.Purpose</p>
 
 	@if (Model.IsHosting && !Model.Done)

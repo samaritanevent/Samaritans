@@ -2,7 +2,10 @@
     
 
 <tr class="@(Model.IsOrganizing ? "organizing" : "")">
-    <td>
+   <td>
+       <i class ="@(Model.IsOrganizing ? "fa fa-check greenIcon" : "")"></i>
+   </td>
+     <td>
         @Html.DisplayFor(x => x.Name)
     </td>
     <td>
