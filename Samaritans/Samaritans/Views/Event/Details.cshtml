@@ -1,24 +1,36 @@
 ﻿@model Samaritans.Models.EventViewModel
 @{
-    ViewBag.Title = Model.Name;
+	ViewBag.Title = Model.Name;
 }
 
-<article class="event">
-	<form>
-		<h2>@M<input type="type" name="name" value="model.Name</h2>
-		<div>@Model.EventTime</div>
-		<div>@Model.Attendance</div>
-		<p>@Model.Purpose</p>
-		<h3>Bring:</h3>
-		@for (var i = 0; i < Model.Resources.Length; i++)
-		{
-			var resources = Model.Resources[i];
-			<div>
-				<span>resource.Description</span>
-				<input type="hidden" name="resources[i].description" />
-				<input type="number" name="resources[i].quantity" />
-			</div>
-		}
-		" /> type="submit" value="Join" />
-	</form>
+<article class="event @{Model.Obsolete ? "obsolete" : ""}">
+	@if (Model.IsHosting || Model.IsAttending)
+	{
+		<i class="fa fa-check"></i>
+		<h2 class="@{Model.IsHosting ? "hosting" : "attending"}">@Model.Name</h2>
+		<p>@Model.AttendanceDisplay</p>
+			}
+			else
+			{
+		<h2>@Model.Name</h2>
+			}
+	<div class="organizer">
+		<span>@Model.OrganizerName</span>
+	</div>
+	<div>@Model.TimeDisplay</div>
+	<div class="@{Model.CapacityWarning ? "warn" : ""}">@Model.Attendance</div>
+	<p>@Model.Purpose</p>
+
+	@if (Model.IsHosting && !Model.Done)
+	{
+		<form> 
+			<input type="submit" value="Cancel" class="btn btn-danger" />
+ 		</form>
+	}
+	else if (!Model.IsAttending && !Model.Obsolete)
+	{
+		<form>
+			<input type="submit" value="Join" class="btn btn-success" />
+		</form>
+	}
 </article>

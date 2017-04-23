@@ -1,4 +1,5 @@
-﻿using Samaritans.Data.Entities;
+﻿using Microsoft.AspNet.Identity;
+using Samaritans.Data.Entities;
 using Samaritans.Models;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,9 @@ namespace Samaritans.Controllers
 		public ActionResult Details(int index)
 		{
 			var e = db.Events.Find(index);
-			return View(new EventViewModel(e));
+			var userId = User.Identity.GetUserId();
+			var currentUser = db.AspNetUsers.Find(userId);
+			return View(new EventViewModel(e, currentUser));
 		}
 	}
 }
