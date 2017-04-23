@@ -30,10 +30,16 @@ textarea {
 .oauth {
     color: white;
     font-family: helvetica;
-    font-size: xx-large;
+    line-height: 30pt;
+    font-size: x-large;
     border-style: none;
     font-stretch: expanded;
+    margin: 6px;
 }
+
+    .oauth .fa {
+        font-size: 40pt;
+    }
 
     .oauth.oauth-google {
         background-color: #db3236;
