@@ -36,9 +36,9 @@ namespace Samaritans.Controllers
             return View(results);
         }
 
-        public ActionResult Details(int index)
+        public ActionResult Details(int id)
         {
-            var e = db.Events.Find(index);
+            var e = db.Events.Find(id);
             var userId = User.Identity.GetUserId();
             var currentUser = db.AspNetUsers.Find(userId);
             return View(new EventViewModel(e, currentUser));
