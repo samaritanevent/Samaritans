@@ -1,5 +1,6 @@
 ﻿using Samaritans.Data.Entities;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Samaritans.Models.Event
@@ -15,16 +16,19 @@ namespace Samaritans.Models.Event
             this.currentUser = currentUser;
         }
 
+        [Display(Name = "Event Name")]
         public string Name
         {
             get { return e.Name; }
         }
 
+        [Display(Name = "Purpose of Event")]
         public string Purpose
         {
             get { return e.Purpose; }
         }
 
+        [Display(Name = "Event is Outdated")]
         public bool Obsolete
         {
             get
@@ -33,11 +37,13 @@ namespace Samaritans.Models.Event
             }
         }
 
+        [Display(Name = "Event is Full")]
         public bool IsFull
         {
             get { return e.Participants.Count >= e.MaxAttendance; }
         }
 
+        [Display(Name = "Event has Concluded")]
         public bool Done
         {
             get { return DateTime.Now > e.EventDate; }
@@ -53,6 +59,7 @@ namespace Samaritans.Models.Event
             get { return e.Participants.Any(p => p.User == currentUser); }
         }
 
+        [Display(Name = "Time to Event")]
         public string TimeDisplay
         {
             get
@@ -81,6 +88,7 @@ namespace Samaritans.Models.Event
             }
         }
 
+        [Display(Name = "Attendance")]
         public string AttendanceDisplay
         {
             get
@@ -100,6 +108,7 @@ namespace Samaritans.Models.Event
             }
         }
 
+        [Display(Name = "Event Capacity")]
         public bool CapacityWarning
         {
             get
@@ -108,11 +117,13 @@ namespace Samaritans.Models.Event
             }
         }
 
+        [Display(Name = "Event Capacity")]
         public bool BelowCapacity
         {
             get { return e.Participants.Count < e.MinAttendance; }
         }
 
+        [Display(Name = "Attendance")]
         public string Attendance
         {
             get
@@ -133,16 +144,19 @@ namespace Samaritans.Models.Event
             }
         }
 
+        [Display(Name = "Minimum Attendance")]
         public int MinAttendance
         {
             get { return e.MinAttendance; }
         }
 
+        [Display(Name = "Max Attendance")]
         public int MaxAttendance
         {
             get { return e.MaxAttendance; }
         }
 
+        [Display(Name = "Organizer Name")]
         public string OrganizerName
         {
             get { return e.Organizer.UserName; }

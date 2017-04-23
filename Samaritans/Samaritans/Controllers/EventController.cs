@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using Samaritans.Data.Entities;
 using Samaritans.Models.Event;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -17,8 +19,21 @@ namespace Samaritans.Controllers
 
         public ActionResult Index()
         {
-            var results = db.Events.AsEnumerable()
-                .Select(x => new EventViewModel(x, x.Organizer)).ToList();
+            var numberGen = new Random();
+
+            var results = db.Events
+                .AsEnumerable()
+                .Select(x => new EventListModel
+                {
+                    Name = x.Name,
+                    EventDate = x.EventDate,
+                    MaxAttendance = x.MaxAttendance,
+                    MinAttendance = x.MinAttendance,
+                    Purpose = x.Purpose,
+                    OrganizerName = User.Identity.GetUserName(),
+                    DistanceFromUser = decimal.Parse($"{numberGen.Next(1, 10)}.{numberGen.Next(1, 10)}")
+                }).ToList();
+
             return View(results);
         }
 
@@ -52,7 +67,32 @@ namespace Samaritans.Controllers
 
             db.Events.Add(eventEntity);
             db.SaveChanges();
-            return View();
+
+            return View("Index");
+        }
+        public JsonResult GetEvents(DateTime startDate, DateTime endDate)
+        {
+            var results = new List<FullCalendarEventModel>();
+
+            foreach (var eventRecord in db.Events.Where(x => x.EventDate >= startDate && x.EventDate <= endDate))
+            {
+                //TimeSpan variable = datevalue1 - datevalue2;
+                results.Add(new FullCalendarEventModel()
+                {
+                    id = eventRecord.Id.ToString(),
+                    title = "An Event!",
+                    start = eventRecord.EventDate,
+                    end = eventRecord.EventDate.AddDays(1),
+                    backgroundColor = "#C2C2C2",
+                    url = Url.Action("Details", "Event", new { id = eventRecord.Id }),
+                    className = eventRecord.MinAttendance != eventRecord.MaxAttendance
+                        ? ""
+                        : "EventFull"
+                });
+            }
+
+
+            return Json(results, JsonRequestBehavior.AllowGet);
         }
     }
 }
