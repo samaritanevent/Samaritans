@@ -22,15 +22,17 @@
 	<p>@Model.Purpose</p>
 
 	@if (Model.IsHosting && !Model.Done)
-	{
-		<form> 
-			<input type="submit" value="Cancel" class="btn btn-danger" />
- 		</form>
-	}
-	else if (!Model.IsAttending && !Model.Obsolete)
-	{
-		<form>
-			<input type="submit" value="Join" class="btn btn-success" />
-		</form>
-	}
+    {
+        using (Html.BeginForm("Cancel", "Event", new { id = Model.Id }, FormMethod.Post, new { onsubmit = "return confirm('Are you sure you want to cancel this event?')" }))
+        {
+            <input class="btn btn-danger" type="submit" value="Cancel" />
+        }
+    }
+    else if (!Model.IsAttending && !Model.Obsolete)
+    {
+        using (Html.BeginForm("Join", "Event", new { id = Model.Id }, FormMethod.Post))
+        {
+            <input class="btn btn-success" type="submit" value="Join" />
+        }
+    }
 </article>

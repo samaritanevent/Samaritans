@@ -98,5 +98,20 @@ namespace Samaritans.Controllers
 
             return Json(results, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult Cancel(int id)
+        {
+            var e = db.Events.Find(id);
+            db.Events.Remove(e);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Join(int id)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }
