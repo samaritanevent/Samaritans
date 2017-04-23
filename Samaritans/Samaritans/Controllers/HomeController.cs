@@ -12,6 +12,8 @@ namespace Samaritans.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.FailedLogin = TempData["FailedLogin"];
+
             //if (!User.Identity.IsAuthenticated)
             {
                 var model = new ExternalLoginListViewModel()
