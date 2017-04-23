@@ -130,6 +130,12 @@ textarea {
     margin-bottom: 1em;
 }
 
+.eventCard:hover
+{
+    background-color: #DCDCDC;
+    cursor: pointer;
+}
+
 .eventCard 
 {
     border: 1px solid #34495E;
@@ -141,6 +147,8 @@ textarea {
 {
     font-weight: bold;
     font-size: 1em;
+    white-space: nowrap;
+    cursor: pointer;
 }
 
 .eventCard .title
