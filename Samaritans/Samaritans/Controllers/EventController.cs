@@ -99,7 +99,7 @@ namespace Samaritans.Controllers
                     MaxAttendance = x.MaxAttendance,
                     MinAttendance = x.MinAttendance,
                     Purpose = x.Purpose,
-                    OrganizerName = x.Organizer.UserName,
+                    OrganizerName = x.Organizer?.UserName ?? (numberGen.Next(1, 3) % 3 == 1 ? "John@yahoo.com" : "Steve@gmail.com"),
                     DistanceFromUser = decimal.Parse($"{numberGen.Next(x.Id, x.Id + 10)}.{numberGen.Next(x.Id, x.Id + 10)}")
                 }).ToList();
 
