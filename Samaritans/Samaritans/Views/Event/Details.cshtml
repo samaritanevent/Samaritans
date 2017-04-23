@@ -1,23 +1,24 @@
 ﻿@model Samaritans.Models.Event.EventViewModel
 @{
-	ViewBag.Title = Model.Name;
+    ViewBag.Title = Model.Name;
 }
 
 <article class="event @(Model.Obsolete ? "obsolete" : "")">
 	@if (Model.IsHosting || Model.IsAttending)
-	{
-		<i class="fa fa-check"></i>
-		<h2 class="@(Model.IsHosting ? "hosting" : "attending")">@Model.Name</h2>
-		<p>@Model.AttendanceDisplay</p>
-	}
-	else
-	{
-		<h2>@Model.Name</h2>
-	}
+    {
+
+		<h2 class="@(Model.IsHosting ? "hosting" : "attending")" > <i class="fa fa-check greenIcon"></i> @Model.Name</h2>
+		<p class="attenderStatus">(@Model.AttendanceDisplay)</p>
+
+    }
+    else
+    {
+		<h2><i class="fa fa-times redIcon"></i>@Model.Name</h2>
+    }
 	<div class="organizer">
 		<span>@Model.OrganizerName</span>
 	</div>
-	<div>@Model.TimeDisplay</div>
+	<div> @Model.TimeDisplay</div>
 	<div class="@(Model.CapacityWarning ? "warn" : "")">@Model.Attendance</div>
 	<p>@Model.Purpose</p>
 

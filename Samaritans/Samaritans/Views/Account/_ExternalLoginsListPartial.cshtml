@@ -11,6 +11,7 @@
 
     var google = providers.FirstOrDefault(o => o.AuthenticationType == "Google");
     var facebook = providers.FirstOrDefault(o => o.AuthenticationType == "Facebook");
+    var twitter = providers.FirstOrDefault(o => o.AuthenticationType == "Twitter");
 
     using (Html.BeginForm("ExternalLogin", "Account", new { Model.ReturnUrl }))
     {
@@ -43,9 +44,9 @@
                 </button>
             }
 
-            @if (google != null)
+            @if (twitter != null)
             {
-                <button type="submit" class="btn-sq-lg oauth oauth-twitter" id="@google.AuthenticationType" name="provider" value="@google.AuthenticationType">
+                <button type="submit" class="btn-sq-lg oauth oauth-twitter" id="@twitter.AuthenticationType" name="provider" value="@twitter.AuthenticationType">
                     <i class="fa fa-twitter"></i>
                     <br />
                     Twitter
